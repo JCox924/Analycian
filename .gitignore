@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+
+# Virtual environment
+venv/
+env/
+
+# Django secrets
+*.env
+
+# VS Code settings
+.vscode/
+
+# Migrations (optional)
+*/migrations/__pycache__/
+*.pyc
+
+# Byte-compiled / packages
+*.egg-info/
+*.egg
+*.pyo
+
+# Mac / OS
+.DS_Store
