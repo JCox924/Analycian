@@ -25,3 +25,6 @@ env/
 
 # Mac / OS
 .DS_Store
+
+# Ignore React and frontend dependencies
+node_modules
