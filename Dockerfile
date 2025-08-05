@@ -11,7 +11,8 @@ WORKDIR /app
 
 # Install backend dependencies
 COPY backend/requirements.txt ./backend/requirements.txt
-RUN pip install --no-cache-dir -r backend/requirements.txt
+RUN pip install --no-cache-dir python-dotenv \
+    && pip install --no-cache-dir -r backend/requirements.txt
 
 # Copy backend source code
 COPY backend/ ./backend/
