@@ -11,6 +11,13 @@ export default function App() {
   const [files, setFiles] = React.useState<any[]>([])
   const [selectedFile, setSelectedFile] = React.useState<any | null>(null)
 
+  React.useEffect(() => {
+    fetch('/api/ping/')
+      .then(res => res.json())
+      .then(data => console.log('Ping:', data))
+      .catch(console.error)
+  }, [])
+
   return (
     <div className="min-h-screen bg-accent">
       <Navbar />
