@@ -27,7 +27,12 @@ SECRET_KEY = 'django-insecure-q)$2+5-*@%-38voeneookpg6zu!=ir@k$(&-s55gkwuea77&hb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+# Allow requests from Docker service name and local dev
+ALLOWED_HOSTS = os.getenv(
+    "ALLOWED_HOSTS",
+    "localhost,127.0.0.1,backend,0.0.0.0"
+).split(",")
+
 
 
 # Application definition
@@ -57,10 +62,17 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# Vite dev server origin
+# Vite dev server origins (browser will hit these)
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = os.getenv(
+    "CORS_ALLOWED_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173,http://frontend:5173"
+).split(",")
+
+CSRF_TRUSTED_ORIGINS = os.getenv(
+    "CSRF_TRUSTED_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173,http://frontend:5173"
+).split(",")
 
 ROOT_URLCONF = 'core.urls'
 
