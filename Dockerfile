@@ -16,12 +16,13 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 # Copy backend source code
 COPY backend/ ./backend/
 
-# Prepare Django static directory
-RUN mkdir -p /app/backend/core/static
+# Prepare Django template and static directories
+RUN mkdir -p /app/backend/core/templates
+RUN mkdir -p /app/backend/core/static/js
 
-# Copy frontend static files (index.html and raw assets)
-COPY index.html /app/backend/core/static/
-COPY src/ /app/backend/core/static/src/
+# Copy frontend template and pre-built JS
+COPY index.html /app/backend/core/templates/
+COPY static/js/ /app/backend/core/static/js/
 
 WORKDIR /app/backend/core
 
@@ -33,3 +34,4 @@ EXPOSE 8000
 
 # Start Gunicorn
 CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]
+# This is my Dockerfile

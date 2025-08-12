@@ -3,5 +3,30 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1"
-  }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "vite": "^7.0.6"
+  },
+  "name": "analycian",
+  "version": "1.0.0",
+  "description": "This project is for capstone,",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCox924/Analycian.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JCox924/Analycian/issues"
+  },
+  "homepage": "https://github.com/JCox924/Analycian#readme"
 }
