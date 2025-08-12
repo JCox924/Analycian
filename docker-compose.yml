@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    command: python core/manage.py runserver 0.0.0.0:8000
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: core.settings
+
+  frontend:
+    build:
+      context: ./frontend
+    command: npm run dev -- --host --port 5173
+    working_dir: /usr/src/app
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_PROXY_TARGET: http://backend:8000
+    depends_on:
+      - backend
