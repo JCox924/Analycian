@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import Layout from "./components/layout.tsx";
 import Navbar from './components/navbar'
 import Footer from './components/footer'
 import Home from './pages/home'
@@ -19,8 +20,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-accent">
-      <Navbar />
+    <Layout>
       <Routes>
         <Route
           path="/"
@@ -37,7 +37,6 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
-      <Footer />
-    </div>
+    </Layout>
   )
 }
