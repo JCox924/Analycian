@@ -30,7 +30,8 @@ DEBUG = True
 # Allow requests from Docker service name and local dev
 ALLOWED_HOSTS = os.getenv(
     "ALLOWED_HOSTS",
-    "localhost,127.0.0.1,backend,0.0.0.0"
+    "localhost,127.0.0.1,backend,0.0.0.0,analycian.us-east-1.elasticbeanstalk.com",
+
 ).split(",")
 
 

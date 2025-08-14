@@ -1,27 +1,30 @@
+version: "3.8"
+
 services:
+  web:
+    build:
+      context: .
+      dockerfile: deploy/web.Dockerfile
+    ports:
+      - "80:80"            # EB expects exactly one service publishing host:80
+    depends_on:
+      - backend
+
   backend:
     build:
       context: ./backend
-    command: python core/manage.py runserver 0.0.0.0:8000
-    working_dir: /app
-    volumes:
-      - ./backend:/app
-    ports:
-      - "8000:8000"
+      dockerfile: Dockerfile
     environment:
       DJANGO_SETTINGS_MODULE: core.settings
-
-  frontend:
-    build:
-      context: ./frontend
-    command: npm run dev -- --host --port 5173
-    working_dir: /usr/src/app
-    volumes:
-      - ./frontend:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - "5173:5173"
-    environment:
-      VITE_PROXY_TARGET: http://backend:8000
-    depends_on:
-      - backend
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUNBUFFERED: "1"
+      PORT: "8000"
+      command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
